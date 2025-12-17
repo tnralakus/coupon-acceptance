@@ -1,48 +1,70 @@
-# Project: In-Vehicle Coupon Acceptance Analysis
+# Driver Coupon Acceptance Analysis
 
 ## Executive Summary
-This project investigates the factors influencing whether a driver will accept a coupon delivered to their vehicle dashboard. By examining driver demographics, contextual factors (like destination and weather), and behavioral habits (like how often they visit bars or coffee houses), I discovered that behavioral frequency and current destination are the strongest indicators of acceptance.
+This project analyzes the factors influencing whether a driver accepts a coupon delivered to their mobile device. Utilizing a dataset from the UCI Machine Learning Repository (collected via Amazon Mechanical Turk), the study examines demographics, contextual variables, and behavioral patterns to distinguish between "acceptors" and "non-acceptors."
 
-## The Data
-The analysis was performed on a dataset containing 12,684 observations, each representing a unique scenario where a coupon was delivered to a driver. We cleaned the data by handling missing values (primarily by dropping the nearly empty 'car' column and imputing other missing values with the most frequent occurrences) to ensure the analysis was based on high-quality information.
+**Key Insight:** I discovered that **behavioral frequency** and **current destination** are the strongest indicators of acceptance.
 
-## Key Findings: Who Accepts the Coupon?
-### 1. Overall Acceptance
-Across all coupon types (Bar, Coffee House, Carry Away, Cheap Restaurant, Expensive Restaurant), approximately 56.84% of coupons were accepted. However, this rate varies significantly depending on the coupon category and the driver's profile.
+---
 
-### 2. Bar Coupons: Frequency Matters Most
-Drivers were much more likely to accept a bar coupon if they already had a habit of visiting bars.
+## Data Overview
+The dataset consists of 12,684 observations, each representing a unique scenario where a coupon was delivered to a driver. It includes diverse attributes categorized into three main areas:
+* **User Attributes:** Age, gender, marital status, income, and frequency of visiting bars/restaurants.
+* **Contextual Attributes:** Destination, weather, temperature, time, and passenger type.
+* **Coupon Attributes:** Type (Bar, Coffee House, Carry Away, etc.) and expiration.
 
-The Habit Factor: Drivers who visit bars more than 3 times a month accepted coupons at a rate of 76.88%, compared to only 37.06% for those who visit less frequently.
+### Data Cleaning Highlights
+* **Missing Data:** The `car` column was removed (>90% missing). Categorical missing values (~1% missing volume) were handled via mode imputation.
+* **Feature Engineering:** Converted categorical frequency ranges into numeric formats to perform correlation analysis during coffee house coupon anaylsis.
+* **Validation:** Outlier detection confirmed numeric stability across the dataset.
 
-The "No Kids" Advantage: Drivers who were not traveling with children as passengers and were frequent bar-goers showed an acceptance rate of over 71%.
+---
 
-The Age Factor: Drivers over the age of 25 who visit bars at least once a month were significantly more likely to accept coupons (~69.5%) than younger or less frequent visitors (~33.5%).
+## Key Findings
 
-Hypothesis: The ideal target for bar coupons is an adult (25+) who is already a regular patron of such venues and is currently traveling without familial responsibilities (children).
+### 1. Overall Trends
+The average acceptance rate across all coupons is **56.84%**. However, performance varies wildly by category.
 
-### 3. Coffee House Coupons: Context is King
-Coffee house coupons had an overall acceptance rate of 49.92%. Here, the driver's current intent played a massive role.
+![Overall Acceptance](images/architecture-diagram.png)
 
-The "No Rush" Effect: Drivers headed to "No Urgent Place" were the most likely to stop for coffee (58.08% acceptance).
+### 2. Bar Coupons (41.00% Acceptance)
+Targeting for Bar coupons is most effective when:
+* **Frequency:** The driver visits bars >3 times/month (76.88% acceptance).
+* **Social Context:** The driver has no children as passengers (71% acceptance).
+* **Age:** The driver is over 25 years old.
 
-The Commute Barrier: Drivers headed to "Work" (44.06%) or "Home" (35.79%) were much less likely to accept, suggesting that people on a schedule are less willing to take a detour for coffee.
+### 3. Coffee House Coupons (49.92% Acceptance)
+Acceptance is highly sensitive to time and intent:
+* **Top Performers:** Drivers under 30 and frequent coffee house visitors.
+* **Contextual Triggers:** Highest acceptance occurs at 80°F, during the morning, and when the driver has "No Urgent Place" to go.
+* **Peak Segment:** Specific targeting of the above factors yielded an acceptance rate of **82.08%**.
 
-Directional Indifference: Interestingly, whether the coffee house was in the same direction the driver was already traveling or the opposite direction did not significantly impact their choice to stop.
+---
 
-## Conclusion: Profile of a Likely "Acceptor"
-The analysis suggests that the drivers most likely to accept a coupon are those who:
+## Conclusion: The "Acceptor" Profile
+The most likely candidate to accept a coupon:
+1.  **Is a Regular:** Already frequents that type of establishment.
+2.  **Is Not Rushed:** Heading to a non-urgent destination.
+3.  **Is Contextually Ready:** Traveling without children (for bars) or driving in the morning (for coffee).
 
-Already frequent the type of business offered in the coupon (Behavioral Loyalty).
+---
 
-Are not under time pressure (Heading to a non-urgent destination).
+## Setup and Installation
 
-Are traveling in a social context suitable for the venue (e.g., no children for a bar coupon).
+### Project Structure
+* `data/coupons.csv`: The raw dataset containing 12,684 observations.
+* `coupon_acceptance_eda.ipynb`: A comprehensive Jupyter Notebook containing data cleaning, exploratory data analysis (EDA), and visualizations.
 
-## How to Use This Repository
-data/coupons.csv: The raw dataset used for analysis.
+### Prerequisites
+You will need Python 3.x and the following libraries:
+* `pandas`
+* `seaborn`
+* `matplotlib`
+* `plotly`
 
-coupon_acceptance_eda.ipynb: The Jupyter Notebook containing the full Python code, visualizations, and detailed statistical breakdowns.
-
-## Requirements
-To run the analysis, you will need Python with the pandas, seaborn, matplotlib, and plotly libraries installed.
+### Running the Analysis
+1. Clone the repository:
+   `git clone https://github.com/yourusername/coupon-acceptance-analysis.git`
+2. Navigate to the directory and launch Jupyter:
+   `jupyter notebook coupon_acceptance_eda.ipynb`
+""";
