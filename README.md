@@ -25,16 +25,14 @@ The dataset consists of 12,684 observations, each representing a unique scenario
 ### 1. Overall Trends
 The average acceptance rate across all coupons is **56.84%**. However, performance varies wildly by category.
 
-![Overall Acceptance](images/architecture-diagram.png)
-
 ### 2. Bar Coupons (41.00% Acceptance)
 Targeting for Bar coupons is most effective when:
 * **Frequency:** The driver visits bars >3 times/month (76.88% acceptance).
-* **Social Context:** The driver has no children as passengers (71% acceptance).
-* **Age:** The driver is over 25 years old.
+* **The "No Kids" Advantage:** The driver has no children as passengers (71% acceptance).
+* **Age:** The driver is over 25 years old (~69.5% acceptance).
 
 ### 3. Coffee House Coupons (49.92% Acceptance)
-Acceptance is highly sensitive to time and intent:
+Acceptance is sensitive to time and intent:
 * **Top Performers:** Drivers under 30 and frequent coffee house visitors.
 * **Contextual Triggers:** Highest acceptance occurs at 80°F, during the morning, and when the driver has "No Urgent Place" to go.
 * **Peak Segment:** Specific targeting of the above factors yielded an acceptance rate of **82.08%**.
@@ -64,7 +62,6 @@ You will need Python 3.x and the following libraries:
 
 ### Running the Analysis
 1. Clone the repository:
-   `git clone https://github.com/yourusername/coupon-acceptance-analysis.git`
+   `git clone https://github.com/tnralakus/coupon-acceptance.git`
 2. Navigate to the directory and launch Jupyter:
    `jupyter notebook coupon_acceptance_eda.ipynb`
-""";
